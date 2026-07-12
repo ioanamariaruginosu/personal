@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ioana Ruginosu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3ede2;
+    --paper-2:#ece4d6;
+    --ox:#450011;
+    --ox-soft:#6d1a2c;
+    --ox-tint:#efe1e1;
+    --ink:#1f1a17;
+    --ink-soft:#6a6157;
+    --ink-faint:#a79e90;
+    --line:#ded4c4;
+    --sans:'Inter',system-ui,sans-serif;
+    --black:'Archivo Black',system-ui,sans-serif;
+    --hand:'Caveat',cursive;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(0,0,0,.015), transparent 40%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+  }
+  ::selection{background:var(--ox);color:var(--paper)}
+  a{color:inherit;text-decoration:none}
+
+  .shell{max-width:1220px;margin:0 auto;padding:0 44px}
+  @media(max-width:640px){.shell{padding:0 22px}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100vh;overflow:hidden}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 1fr;gap:20px;
+    min-height:100vh;align-items:center;
+  }
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:0}
+  }
+
+  /* nav — handwritten */
+  .nav{
+    position:absolute;top:0;left:0;right:0;z-index:20;
+    display:flex;justify-content:flex-end;gap:38px;
+    padding:34px 44px;
+  }
+  .nav a{
+    font-family:var(--hand);font-size:1.65rem;color:var(--ink);
+    transition:color .2s,transform .2s;line-height:1;
+  }
+  .nav a:hover{color:var(--ox);transform:rotate(-3deg)}
+  @media(max-width:640px){
+    .nav{gap:20px;padding:22px;flex-wrap:wrap;justify-content:center}
+    .nav a{font-size:1.35rem}
+  }
+
+  /* left: name block */
+  .name-block{position:relative;z-index:10;padding-left:4px}
+  @media(max-width:900px){.name-block{padding:20px 0 60px}}
+  .hi{font-family:var(--hand);font-size:2rem;color:var(--ox);transform:rotate(-2deg);display:inline-block;margin-bottom:6px}
+  .bigname{
+    font-family:var(--black);
+    font-size:clamp(3.2rem,8.5vw,7rem);
+    line-height:.86;letter-spacing:-0.03em;color:var(--ink);
+    text-transform:lowercase;
+  }
+  .role{
+    font-family:var(--hand);font-weight:600;
+    font-size:clamp(2.1rem,5vw,3.4rem);color:var(--ox);
+    transform:rotate(-3deg);margin:2px 0 0 14px;line-height:1;
+  }
+  .tagline{
+    margin-top:34px;max-width:34ch;font-size:1.08rem;color:var(--ink-soft);
+  }
+  .tagline b{color:var(--ink);font-weight:500}
+
+  /* right: collage */
+  .collage{position:relative;height:100%;min-height:560px}
+  @media(max-width:900px){.collage{min-height:520px;margin-bottom:40px}}
+
+  .obj{position:absolute;filter:drop-shadow(0 10px 18px rgba(60,40,20,.16))}
+
+  /* crumpled tissue (big pale blob) */
+  .tissue{top:8%;left:7%;width:66%;opacity:.97;filter:drop-shadow(0 14px 22px rgba(60,40,20,.14))}
+
+  /* torn paper scraps */
+  .scrap{background:#faf6ef;color:#8a7f70;font-family:var(--hand);font-size:1.35rem;
+    padding:16px 22px;line-height:1.15;
+    box-shadow:0 8px 20px -8px rgba(60,40,20,.3);
+  }
+  .scrap.a{top:20%;right:-2%;width:210px;transform:rotate(6deg);
+    clip-path:polygon(0 8%,12% 0,88% 5%,100% 0,97% 88%,80% 100%,20% 96%,3% 100%);}
+  .scrap.b{bottom:10%;left:6%;width:238px;height:120px;transform:rotate(-7deg);
+    clip-path:polygon(2% 6%,40% 0,96% 4%,100% 40%,98% 92%,60% 100%,8% 96%,0 60%);}
+
+  /* polaroid */
+  .polaroid{
+    position:absolute;right:1%;bottom:14%;width:min(280px,42%);
+    background:#fdfbf6;padding:14px 14px 46px;transform:rotate(4deg);
+    box-shadow:0 16px 36px -12px rgba(60,40,20,.4);z-index:6;
+  }
+  .polaroid .pic{
+    width:100%;aspect-ratio:3/3.75;
+    background:linear-gradient(150deg,#6d7f92,#c9b6a0 60%,#8a6f57);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+  .polaroid .pic .ph{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.85);letter-spacing:.04em;padding:0 14px;line-height:1.6}
+  .polaroid .cap{font-family:var(--hand);font-size:1.4rem;color:var(--ink);text-align:center;margin-top:8px;transform:rotate(-1deg)}
+  /* safety pin over polaroid */
+  .pin{position:absolute;top:-14px;right:14px;z-index:8;transform:rotate(28deg)}
+
+  /* receipt / shipping label */
+  .receipt{
+    position:absolute;right:-7%;bottom:8%;width:132px;z-index:5;
+    background:#f7f3ea;font-family:var(--mono);font-size:9px;color:#5b5348;
+    padding:14px 12px;transform:rotate(7deg);line-height:1.7;
+    box-shadow:0 10px 22px -10px rgba(60,40,20,.35);
+    clip-path:polygon(0 0,100% 0,100% 96%,92% 100%,84% 96%,76% 100%,68% 96%,60% 100%,52% 96%,44% 100%,36% 96%,28% 100%,20% 96%,12% 100%,4% 96%,0 100%);
+  }
+  .receipt .big{font-family:var(--black);font-size:11px;color:#1f1a17;letter-spacing:0;margin-bottom:6px;text-transform:none}
+  .receipt .bars{margin-top:8px;height:26px;background:repeating-linear-gradient(90deg,#1f1a17 0 2px,transparent 2px 4px,#1f1a17 4px 5px,transparent 5px 8px)}
+
+  /* crayon flowers (SVG) */
+  .flower{position:absolute;z-index:7}
+  .flower.f1{top:18%;left:6%;width:80px;transform:rotate(-8deg)}
+  .flower.f2{bottom:22%;right:48%;width:92px;transform:rotate(12deg)}
+
+  .scroll-cue{position:absolute;bottom:26px;left:44px;z-index:15;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase;animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @media(max-width:900px){.scroll-cue{display:none}}
+
+  /* ---------- shared sections ---------- */
+  .sec{padding:96px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:44px}
+  .sec-head .n{font-family:var(--mono);font-size:12px;color:var(--ox);letter-spacing:.1em}
+  .sec-head h2{font-family:var(--black);font-weight:400;font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-0.02em;text-transform:lowercase}
+  .sec-head .scrib{font-family:var(--hand);font-size:1.7rem;color:var(--ox);margin-left:6px;transform:rotate(-3deg)}
+  .sec-head .r{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.05em}
+  @media(max-width:640px){.sec-head .r{display:none}}
+
+  /* project rows — image left, big title right */
+  .rows{display:flex;flex-direction:column;gap:74px}
+  .prow{
+    display:grid;grid-template-columns:minmax(0,1.05fr) 1fr;gap:56px;align-items:center;
+    color:inherit;
+  }
+  @media(max-width:820px){
+    .prow{grid-template-columns:1fr;gap:22px}
+  }
+  .prow-img{
+    position:relative;aspect-ratio:16/11;border-radius:18px;overflow:hidden;
+    background:var(--tw);
+    box-shadow:0 24px 46px -30px rgba(60,40,20,.5);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .4s cubic-bezier(.2,.7,.3,1),box-shadow .4s;
+  }
+  .prow-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.14));pointer-events:none}
+  .prow-img.light{border:1px solid var(--line)}
+  .prow-img.light::after{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.05))}
+  .prow-img.light .ph{color:var(--ink-faint)}
+  .prow-img .ph{position:relative;z-index:1;font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:rgba(255,255,255,.72);text-transform:lowercase}
+  .prow:hover .prow-img{transform:translateY(-6px) scale(1.012);box-shadow:0 34px 60px -30px rgba(60,40,20,.6)}
+  /* real project photo fills the frame */
+  .prow-img.has-img{background:#e34a24}
+  .prow-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:0}
+  /* award badge on image corner */
+  .prow-award{
+    position:absolute;top:14px;left:14px;z-index:3;
+    font-family:var(--hand);font-weight:700;font-size:1.5rem;line-height:1;
+    color:var(--ox);background:var(--paper);
+    padding:8px 15px 6px;border-radius:100px;transform:rotate(-5deg);
+    box-shadow:3px 4px 0 rgba(69,0,17,.18);white-space:nowrap;
+    transition:transform .3s;
+  }
+  .prow:hover .prow-award{transform:rotate(-5deg) scale(1.05)}
+
+  .prow-txt{display:flex;flex-direction:column}
+  .prow-txt .tag{font-family:var(--mono);font-size:22px;letter-spacing:.06em;color:var(--ox);margin-bottom:14px}
+  .prow-txt h3{
+    font-family:var(--black);font-weight:400;text-transform:lowercase;
+    font-size:clamp(2.4rem,5vw,4rem);line-height:.92;letter-spacing:-0.03em;
+    color:var(--ink);transition:color .3s;margin-bottom:14px;
+  }
+  .prow:hover .prow-txt h3{color:var(--ox)}
+  .prow-txt .cat{font-size:1.05rem;color:var(--ink-soft);margin-bottom:14px}
+  .prow-txt .desc{font-size:.98rem;color:var(--ink-soft);max-width:46ch;line-height:1.6;margin-bottom:18px}
+  .prow-txt .go{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);display:inline-flex;gap:7px;transition:color .25s,gap .25s;align-self:flex-start}
+  .prow:hover .prow-txt .go{color:var(--ox);gap:12px}
+
+  /* more on github — end of work */
+  .more{margin-top:64px;display:flex;justify-content:center}
+  .more a{
+    display:inline-flex;align-items:baseline;gap:14px;
+    font-family:var(--black);font-weight:400;text-transform:lowercase;
+    font-size:clamp(1.6rem,4vw,2.6rem);letter-spacing:-0.02em;color:var(--ink);
+    border-bottom:3px solid var(--line);padding-bottom:6px;transition:color .25s,border-color .25s,gap .25s;
+  }
+  .more a .arw{font-family:var(--hand);font-size:1.4em;color:var(--ox);line-height:0}
+  .more a:hover{color:var(--ox);border-color:var(--ox);gap:20px}
+
+  .about{display:grid;grid-template-columns:1.5fr 1fr;gap:54px;align-items:start}
+  @media(max-width:820px){.about{grid-template-columns:1fr;gap:32px}}
+  .about .lead{font-family:var(--hand);font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.25;color:var(--ink)}
+  .about .lead b{color:var(--ox)}
+  .about .body{color:var(--ink-soft);font-size:1.02rem;margin-top:20px}
+  .about .body p+p{margin-top:14px}
+  .about .body code{font-family:var(--mono);font-size:.85em;color:var(--ox);background:var(--ox-tint);padding:1px 6px;border-radius:4px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips .ct{font-family:var(--mono);font-size:11px;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:6px 12px;background:var(--paper)}
+  .chips .ct.hot{color:var(--ox);border-color:var(--ox)}
+  /* labeled timeline list */
+  .tl{list-style:none;display:flex;flex-direction:column}
+  .tl li{display:grid;grid-template-columns:96px 1fr;gap:20px;align-items:baseline;
+    padding:15px 0;border-bottom:1px solid var(--line)}
+  .tl li:first-child{border-top:1px solid var(--line)}
+  .tl .k{font-family:var(--mono);font-size:22px;letter-spacing:.08em;color:var(--ox)}
+  .tl .v{font-size:1.05rem;color:var(--ink)}
+  @media(max-width:820px){.tl li{grid-template-columns:80px 1fr;gap:14px}}
+
+  /* ---- let's connect / footer ---- */
+  #contact{margin-top:40px}
+  .connect{position:relative;background:var(--paper);padding:90px 0 70px;overflow:hidden}
+  .connect-in{position:relative;z-index:2;max-width:82%}
+  .thanks{font-family:var(--hand);font-size:2rem;color:var(--ox-soft);transform:rotate(-2deg);display:inline-block;margin-bottom:2px}
+  .connect-h{font-family:var(--black);font-weight:400;text-transform:lowercase;
+    font-size:clamp(2.6rem,7vw,5rem);line-height:.9;letter-spacing:-0.03em;color:var(--ink);margin-bottom:14px}
+  .connect-mail{display:inline-block;font-family:var(--black);font-weight:400;text-transform:lowercase;
+    font-size:clamp(1.6rem,5.5vw,3.6rem);line-height:1;letter-spacing:-0.02em;color:var(--ox);
+    word-break:break-word;transition:opacity .2s}
+  .connect-mail:hover{opacity:.7}
+  .connect-flower{position:absolute;top:6%;right:-10px;width:min(300px,32%);z-index:1;pointer-events:none}
+  @media(max-width:760px){.connect-in{max-width:100%}.connect-flower{display:none}}
+
+  .footband{background:var(--ox);color:#f3ede2;padding:64px 0 40px;position:relative;overflow:hidden}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:clamp(18px,4vw,52px);margin-bottom:40px}
+  .foot-nav a{font-family:var(--black);font-weight:400;text-transform:lowercase;
+    font-size:clamp(2rem,5.5vw,3.6rem);line-height:1;letter-spacing:-0.02em;
+    color:rgba(243,237,226,.42);transition:color .2s}
+  .foot-nav a:hover{color:#f3ede2}
+  .foot-social{display:flex;gap:22px;margin-bottom:70px}
+  .foot-social a{color:rgba(243,237,226,.55);transition:color .2s,transform .2s}
+  .foot-social a svg{width:40px;height:40px;display:block}
+  .foot-social a:hover{color:#f3ede2;transform:translateY(-2px)}
+  .foot-flower{position:absolute;left:44px;bottom:64px;width:120px;pointer-events:none}
+  @media(max-width:760px){.foot-flower{width:88px;left:22px;bottom:70px;opacity:.7}}
+  .foot-copy{font-family:var(--sans);font-size:13px;color:rgba(243,237,226,.55);letter-spacing:.02em;text-align:right}
+  @media(max-width:760px){.foot-copy{text-align:left;margin-top:40px}}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <nav class="nav">
+    <a href="#work">work</a>
+    <a href="#about">about me</a>
+    <a href="#skills">skills</a>
+    <a href="#contact">let's connect</a>
+  </nav>
+
+  <div class="shell">
+    <div class="hero-grid">
+
+      <!-- left: name -->
+      <div class="name-block">
+        <div class="hi">hi, I'm</div>
+        <h1 class="bigname">ioana<br>ruginosu</h1>
+        <div class="role">software engineer</div>
+      </div>
+
+      <!-- right: collage -->
+      <div class="collage">
+
+        <!-- crumpled paper (uploaded image) -->
+        <img class="obj tissue" src="/Users/ioana/Downloads/paper-texture-background-crumpled-paper-texture-paper-type-free-vector-removebg-preview.png">
+
+        <!-- crayon tulips -->
+        <svg class="flower f1" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="none" stroke="#450011" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M34 40 Q34 66 50 70 Q66 66 66 40"/>
+            <path d="M34 40 Q33 22 44 18 Q50 30 50 42"/>
+            <path d="M66 40 Q67 22 56 18 Q50 30 50 42"/>
+            <path d="M44 18 Q50 10 56 18 Q52 30 50 40"/>
+            <path d="M50 70 L50 112"/>
+            <path d="M50 88 Q30 84 26 98"/>
+            <path d="M50 96 Q72 94 76 108"/>
+          </g>
+        </svg>
+
+        <svg class="flower f2" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="none" stroke="#450011" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M33 38 Q33 66 50 71 Q67 66 67 38"/>
+            <path d="M33 38 Q31 19 43 15 Q50 28 50 41"/>
+            <path d="M67 38 Q69 19 57 15 Q50 28 50 41"/>
+            <path d="M43 15 Q50 7 57 15 Q52 28 50 39"/>
+            <path d="M50 71 L50 114"/>
+            <path d="M50 90 Q29 86 25 101"/>
+            <path d="M50 99 Q73 97 77 111"/>
+          </g>
+        </svg>
+
+        <!-- torn scraps with handwriting -->
+        <div class="obj scrap a">currently<br>caffeinated</div>
+        <div class="obj scrap b">iași, RO 🇷🇴 → amsterdam, NL 🇳🇱</div>
+
+        <!-- polaroid -->
+        <div class="obj polaroid">
+          <svg class="pin" width="60" height="30" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 14 C6 6 54 6 54 16 C54 24 12 24 12 16 C12 11 40 11 40 15" stroke="#8b8578" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <circle cx="7" cy="14" r="4" fill="#8b8578"/>
+          </svg>
+          <!-- REPLACE the .pic div contents with <img src="you.jpg"> -->
+          <img class="pic" src="me.jpeg" alt="My photo">
+          <div class="cap">hi, that's me :)</div>
+        </div>
+
+        <!-- receipt / shipping label -->
+        <div class="obj receipt">
+          <div class="big">RUGINOSU/M.I.</div>
+          To<br>
+          BOOKING.COM<br>
+          SEP&nbsp;&nbsp;2026<br>
+          AMS · NL<br>
+          Seq: 0042
+          <div class="bars"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WORK ============ -->
+<div class="shell">
+  <section class="sec" id="work">
+    <div class="sec-head reveal">
+      <h2>featured work</h2>
+      <span class="scrib">nights & weekends :)</span>
+      <span class="r">// awards, hackathons &amp; builds</span>
+    </div>
+    <div class="rows">
+
+      <a class="prow reveal" href="https://standup.technology/coming-soon" title="Standup">
+        <div class="prow-img light" style="--tw:#ffffff">
+          <img class="prow-photo" src="/Users/ioana/Downloads/standuplogo.jpeg">
+          <span class="prow-award">building now!</span>
+        </div>
+        <div class="prow-txt">
+          <span class="tag" style="font-family: var(--hand);">Startup · solo build</span>
+          <h3>standup</h3>
+          <span class="cat">Simulated Software Company · Agents</span>
+          <span class="desc">Where early-career developers practice real team dynamics: realistic AI teammates, deployment infra, before their first job.</span>
+          <span class="go">in progress</span>
+        </div>
+      </a>
+
+      <a class="prow reveal" href="https://github.com/laurens-degilde/AntWhale-hackathon-teamTwo" target="_blank" rel="noopener">
+        <div class="prow-img" style="--tw:linear-gradient(135deg,#1a3a2a,#2d5040)">
+          <img class="prow-photo" src="/Users/ioana/Downloads/1777405239397.jpeg">
+          <span class="prow-award">top 10!</span>
+        </div>
+        <div class="prow-txt">
+          <span class="tag" style="font-family: var(--hand);">Whale × Anthropic Hackathon</span>
+          <h3>wildcross</h3>
+          <span class="cat">Conservation Tech · Circuitscape · GIS · Python</span>
+          <span class="desc">Decides where wildlife crossings should go, then handles the paperwork, connectivity analysis over open geodata, plus auto-generated landowner letters and subsidy forms.</span>
+          <span class="go">github →</span>
+        </div>
+      </a>
+
+      <a class="prow reveal" href="https://www.utchallenge.nl/candidate/details/42656" target="_blank" rel="noopener">
+        <div class="prow-img has-img">
+          <img class="prow-photo" src="/Users/ioana/Downloads/asmlaward.jpeg">
+          <span class="prow-award">2nd place!</span>
+        </div>
+        <div class="prow-txt">
+          <span class="tag" style="font-family: var(--hand);">UT Challenge · ASML Young Makers · €2500</span>
+          <h3>piano lites</h3>
+          <span class="cat">Smart Piano System · Flask · OpenCV · Raspberry Pi</span>
+          <span class="desc">Affordable piano-learning system with real-time feedback and performance analytics.</span>
+          <span class="go">view submission →</span>
+        </div>
+      </a>
+
+      <a class="prow reveal" href="https://github.com/ioanamariaruginosu/JunctionXDelft-Uber-Attention-Seekers" target="_blank" rel="noopener">
+        <div class="prow-img" style="--tw:#000000">
+          <img class="prow-photo" src="/Users/ioana/Downloads/ube.jpeg">
+          <span class="prow-award">5th / 50</span>
+        </div>
+        <div class="prow-txt">
+          <span class="tag" style="font-family: var(--hand);">JunctionX Delft · Uber Challenge</span>
+          <h3>ube</h3>
+          <span class="cat">Driver Co-pilot · Flutter · Spring Boot · Docker</span>
+          <span class="desc">A co-pilot for Uber drivers and couriers, demand forecasting, wellness nudges, and accessible trip recommendations, built in one weekend.</span>
+          <span class="go">github →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="more reveal">
+      <a href="https://github.com/ioanamariaruginosu?tab=repositories" target="_blank" rel="noopener">
+        &amp; more on github <span class="arw">↝</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="sec" id="about">
+    <div class="sec-head reveal">
+      <h2>about me</h2>
+    </div>
+    <div class="about">
+      <div class="reveal">
+        <p class="lead">
+          I studied <b>business &amp; computer science</b>, and somewhere along the way
+          I realized I liked the <b>CS half</b> a lot more (one could probably easily guess that).
+        </p>
+        <p class="lead">
+          Some of my interests are <b>cryptography</b>, <b>quantum</b> and <b>computer networking</b>. 
+        </p>
+      </div>
+      <div class="reveal" id="skills">
+        <ul class="tl">
+          <li><span class="k" style="font-family: var(--hand);">grad</span><span class="v">BSc Business &amp; IT @ University of Twente</span></li>
+          <li><span class="k" style="font-family: var(--hand);">next</span><span class="v">MSc Computer Science @ TU Delft</span></li>
+          <li><span class="k" style="font-family: var(--hand);">now</span><span class="v">SWE Intern @ Amazon</span></li>
+          <li><span class="k" style="font-family: var(--hand);">ex</span><span class="v">SWE Intern @ Booking.com</span></li>
+          <li><span class="k" style="font-family: var(--hand);">incoming</span><span class="v">SWE @ Booking.com</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LET'S CONNECT / FOOTER ============ -->
+<footer id="contact">
+  <!-- light band -->
+  <div class="connect">
+    <div class="shell">
+      <div class="reveal connect-in">
+        <span class="thanks">thanks for being here</span>
+        <h2 class="connect-h">let's connect</h2>
+        <a class="connect-mail" href="mailto:ioana.ruginosu@gmail.com">ioana.ruginosu@gmail.com</a>
+      </div>
+    </div>
+    <!-- crayon tulip + arm, top right -->
+    <svg class="connect-flower" viewBox="0 0 260 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M255 135 Q205 132 160 118" stroke="#c98b66" stroke-width="12" stroke-linecap="round" opacity=".5"/>
+      <path d="M160 118 q-12 -4 -14 -18" stroke="#c98b66" stroke-width="12" stroke-linecap="round" opacity=".5"/>
+      <g fill="none" stroke="#450011" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M146 100 L120 46"/>
+        <path d="M96 40 Q98 66 118 71 Q138 66 140 40"/>
+        <path d="M96 40 Q94 18 108 14 Q118 28 118 43"/>
+        <path d="M140 40 Q142 18 128 14 Q118 28 118 43"/>
+        <path d="M108 14 Q118 5 128 14 Q122 28 118 40"/>
+        <path d="M133 73 Q150 76 154 90"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- oxblood band -->
+  <div class="footband">
+    <div class="shell">
+      <nav class="foot-nav">
+        <a href="#top">home</a>
+        <a href="#work">work</a>
+        <a href="#about">about</a>
+        <a href="#skills">experience</a>
+      </nav>
+      <div class="foot-social">
+        <a href="https://www.linkedin.com/in/ioana-ruginosu-b86ab22b9" title="add your LinkedIn URL" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.3 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3s-2.3 1.57-2.3 3.2V21H9z"/></svg>
+        </a>
+        <a href="https://github.com/ioanamariaruginosu?tab=repositories" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        </a>
+        <a href="mailto:ioana.ruginosu@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+      </div>
+
+      <!-- scribble tulip -->
+      <svg class="foot-flower" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#f3ede2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".85">
+          <path d="M33 42 Q33 70 50 75 Q67 70 67 42"/>
+          <path d="M33 42 Q31 22 43 18 Q50 31 50 45"/>
+          <path d="M67 42 Q69 22 57 18 Q50 31 50 45"/>
+          <path d="M43 18 Q50 9 57 18 Q52 31 50 43"/>
+          <path d="M50 75 L50 120"/>
+          <path d="M50 94 Q28 90 24 105"/>
+          <path d="M50 103 Q74 101 78 116"/>
+        </g>
+      </svg>
+
+      <div class="foot-copy">© 2026 ioana ruginosu · all rights reserved</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
